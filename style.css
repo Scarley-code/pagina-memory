@@ -1,0 +1,56 @@
+body {
+    background-color: white;
+    color: black;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color:dodgerblue ;
+    color: white;
+}
+
+.pagina_inicio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu_inicio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5%;
+}
+
+#iniciar {
+    width: 20vh;
+    height: 5vh;
+    border: none;
+    border-radius: 5px;
+    background-color:dodgerblue ;
+    color: white;
+    font-weight:bold ;
+}
+
+#iniciar:hover {
+    background-color: rgba(30, 143, 255, 0.8);
+}
+
+.ranking {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    margin: 5%;
+    padding: 20%
+}
+
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color:dodgerblue ;
+    color: white;
+}
