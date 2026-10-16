@@ -11,6 +11,16 @@ header {
     color: white;
 }
 
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color:dodgerblue ;
+    color: white;
+}
+
+/* index.html */
+
 .pagina_inicio {
     display: flex;
     flex-direction: column;
@@ -47,10 +57,22 @@ header {
     padding: 20%
 }
 
-footer {
+/* juego.html */
+
+.cuadricula {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    background-color:dodgerblue ;
-    color: white;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cartas {
+    display: grid;
+    grid-template-columns: (2, 1fr);
+    margin: 1%;
+    padding: 5%;
+    width: 5%;
+    height: 5vh;
+    background-color: darkgray;
+    border: 1px solid black;
+    border-radius: 15px;
 }
