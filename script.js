@@ -1,19 +1,11 @@
-let juego_iniciado = false;
-let contador = 60;
+"use strict";
 
-document.getElementById("iniciar").addEventListener("click", function () {
-  window.location.href = "juego.html";
-  juego_iniciado = true;
-  if (juego_iniciado) {
-    recorrerCuadricula();
+const iniciar = document.querySelector("#iniciar");
+
+document.addEventListener("DOMContentLoaded", function () {
+  if (iniciar) {
+    iniciar.addEventListener("click", function () {
+      window.location.href = "juego.html";
+    });
   }
 });
-
-function recorrerCuadricula() {
-  let cartas = [];
-  for (let i = 0; i < 30; i++) {
-    let id_carta = document.getElementById("carta" + i);
-    cartas.push(id_carta);
-  }
-  console.log(cartas);
-}
