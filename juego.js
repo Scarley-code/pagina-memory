@@ -1,6 +1,7 @@
 "use strict";
 
 const tiempo = document.querySelector("#tiempo");
+const puntos = document.querySelector("#puntuaciones");
 const cartas = document.querySelectorAll(".cartas");
 
 class Juego {
@@ -8,6 +9,7 @@ class Juego {
     this.contador = 5;
     this.tiempo_transcurrido = 0;
     this.tiempo_final = 0;
+    this.puntuacion = 0;
   }
 
   temporizador() {
@@ -31,6 +33,8 @@ class Juego {
       for (let cadaCarta of cartas) {
         cadaCarta.addEventListener("click", function () {
           console.log("Has hecho clic en: " + cadaCarta.id);
+          this.puntuacion++;
+          puntos.innerHTML = "Puntuación: " + this.puntuacion;
         });
       }
     } else {

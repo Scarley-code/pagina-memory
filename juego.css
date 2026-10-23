@@ -10,7 +10,7 @@ body {
     grid-template-rows: repeat(5, 1fr);
     justify-content: center;
     align-items: center;
-    gap: 50px;
+    gap: 40px;
 }
 
 .cartas {
@@ -24,9 +24,10 @@ body {
 }
 
 .tiempo_de_juego {
-    display: inline-flex;
+    display: flex;
     flex-direction: row;
     justify-content: center;
+    gap: 50px;
     background-color: black;
     color: white;
     font-weight: bold;
