@@ -2,10 +2,14 @@
 
 const iniciar = document.querySelector("#iniciar");
 
-document.addEventListener("DOMContentLoaded", function () {
+const iniciarJuego = () => {
   if (iniciar) {
     iniciar.addEventListener("click", function () {
       window.location.href = "juego.html";
     });
   }
+};
+
+document.addEventListener("DOMContentLoaded", function () {
+  iniciarJuego();
 });
