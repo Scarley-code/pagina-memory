@@ -31,8 +31,15 @@ class Juego {
   pincharCarta() {
     if (this.contador > 0) {
       for (let cadaCarta of cartas) {
-        cadaCarta.addEventListener("click", function () {
+        cadaCarta.addEventListener("click", () => {
           console.log("Has hecho clic en: " + cadaCarta.id);
+          let carta = document.querySelector(`#${cadaCarta.id}`);
+          console.log(carta.dataset.imagen);
+          let carta_flip = document.getElementById(cadaCarta.id);
+          carta_flip.style.background = `url(${carta.dataset.imagen})`;
+          carta_flip.style.backgroundSize = "100%";
+          carta_flip.style.transform = "rotateY(180deg)";
+          carta_flip.style.transition = "transform 0.8s";
           this.puntuacion++;
           puntos.innerHTML = "Puntuación: " + this.puntuacion;
         });
