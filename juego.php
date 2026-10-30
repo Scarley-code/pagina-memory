@@ -1,14 +1,13 @@
 <?php
 session_start();
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $nombre = trim($_POST["Nombre"] ?? "");
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    if ($nombre === "" || mb_strlen($nombre) > 30) {
+    $nombre = $_POST["Nombre"];
+    if ($nombre == "" || strlen($nombre) > 30) {
         header("Location: index.html");
         exit;
     }
-
     $_SESSION["nombre"] = $nombre;
 } else {
     if (!isset($_SESSION["nombre"])) {
