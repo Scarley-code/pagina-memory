@@ -1,3 +1,23 @@
+<?php
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $nombre = trim($_POST["Nombre"] ?? "");
+
+    if ($nombre === "" || mb_strlen($nombre) > 30) {
+        header("Location: index.html");
+        exit;
+    }
+
+    $_SESSION["nombre"] = $nombre;
+} else {
+    if (!isset($_SESSION["nombre"])) {
+        header("Location: index.html");
+        exit;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -44,6 +64,7 @@
         <div id="carta29" class="cartas" data-imagen="./imagenes/Mewtwo.png"></div>
         <div id="carta30" class="cartas" data-imagen="./imagenes/Mewtwo.png"></div>
     </section>
+    <script> localStorage.setItem("nombreJugador", <?= json_encode($_SESSION["nombre"]) ?>);</script>
     <script src="juego.js"></script>
 </body>
 </html>

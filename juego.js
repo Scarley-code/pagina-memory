@@ -108,7 +108,7 @@ class Juego {
 
 document.addEventListener("DOMContentLoaded", function () {
   const partida = new Juego();
-  // partida.mezclarCartas();
+  partida.mezclarCartas();
   partida.temporizador();
   partida.pincharCarta();
 });
