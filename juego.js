@@ -6,10 +6,13 @@ const cartas = document.querySelectorAll(".cartas");
 
 class Juego {
   constructor() {
-    this.contador = 5;
+    this.contador = 60;
     this.tiempo_transcurrido = 0;
     this.tiempo_final = 0;
     this.puntuacion = 0;
+    this.primeraCarta = null;
+    this.segundaCarta = null;
+    this.bloquearCartas = false;
   }
 
   temporizador() {
@@ -21,38 +24,91 @@ class Juego {
       if (this.contador < 0) {
         this.tiempo_final = this.tiempo_transcurrido;
         alert("Se ha acabado el tiempo. Los pokemons han huido.");
-        console.log("Se ha acabado el tiempo.");
-        console.log("Tiempo final: ", this.tiempo_final);
+        clearInterval(this.tiempo_restante);
+      }
+      if (this.puntuacion === 15) {
+        this.tiempo_final = this.tiempo_transcurrido;
+        alert("Juego completado. Tienes 40 puntos extra");
+        this.puntuacion += 40;
+        puntos.innerHTML = "Puntuación: " + this.puntuacion;
         clearInterval(this.tiempo_restante);
       }
     }, 1000);
   }
 
+  mezclarCartas() {
+    for (let i = cartas.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+
+      cartas[i].parentNode.insertBefore(cartas[j], cartas[i]);
+    }
+  }
+
   pincharCarta() {
-    if (this.contador > 0) {
-      for (let cadaCarta of cartas) {
-        cadaCarta.addEventListener("click", () => {
-          console.log("Has hecho clic en: " + cadaCarta.id);
-          let carta = document.querySelector(`#${cadaCarta.id}`);
-          console.log(carta.dataset.imagen);
-          let carta_flip = document.getElementById(cadaCarta.id);
-          carta_flip.style.background = `url(${carta.dataset.imagen})`;
-          carta_flip.style.backgroundSize = "100%";
-          carta_flip.style.transform = "rotateY(180deg)";
-          carta_flip.style.transition = "transform 0.8s";
-          this.puntuacion++;
-          puntos.innerHTML = "Puntuación: " + this.puntuacion;
-        });
-      }
-    } else {
-      console.log("Prueba: " + this.contador);
-      return;
+    for (let cadaCarta of cartas) {
+      cadaCarta.addEventListener("click", () => {
+        if (this.contador < 0) return;
+        if (this.bloquearCartas) return;
+        if (cadaCarta.classList.contains("descubierta")) return;
+
+        cadaCarta.style.transform = "rotateY(90deg)";
+
+        setTimeout(() => {
+          cadaCarta.style.backgroundImage = `url(${cadaCarta.dataset.imagen})`;
+          cadaCarta.style.backgroundSize = "100%";
+          cadaCarta.style.transform = "rotateY(180deg)";
+        }, 400);
+
+        cadaCarta.classList.add("descubierta");
+
+        if (this.primeraCarta === null) {
+          this.primeraCarta = cadaCarta;
+        } else {
+          this.segundaCarta = cadaCarta;
+          this.bloquearCartas = true;
+
+          if (
+            this.primeraCarta.dataset.imagen ===
+            this.segundaCarta.dataset.imagen
+          ) {
+            this.puntuacion++;
+            puntos.innerHTML = "Puntuación: " + this.puntuacion;
+
+            this.primeraCarta = null;
+            this.segundaCarta = null;
+            this.bloquearCartas = false;
+          } else {
+            setTimeout(() => {
+              this.primeraCarta.style.transform = "rotateY(90deg)";
+              this.segundaCarta.style.transform = "rotateY(90deg)";
+
+              setTimeout(() => {
+                this.primeraCarta.style.backgroundImage =
+                  "url('./imagenes/Carta.jpg')";
+                this.segundaCarta.style.backgroundImage =
+                  "url('./imagenes/Carta.jpg')";
+
+                this.primeraCarta.style.transform = "rotateY(0deg)";
+                this.segundaCarta.style.transform = "rotateY(0deg)";
+
+                this.primeraCarta.classList.remove("descubierta");
+                this.segundaCarta.classList.remove("descubierta");
+
+                this.primeraCarta = null;
+                this.segundaCarta = null;
+                this.bloquearCartas = false;
+              }, 400);
+            }, 1000);
+          }
+        }
+      });
     }
   }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
   const partida = new Juego();
+  // partida.mezclarCartas();
   partida.temporizador();
   partida.pincharCarta();
 });

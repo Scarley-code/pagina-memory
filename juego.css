@@ -21,6 +21,8 @@ body {
     background-size: 100%;
     background-position: 0%;
     border: 1px solid black;
+    transform: rotate(180deg) ease;
+    transition: transform 0.4s;
 }
 
 .tiempo_de_juego {

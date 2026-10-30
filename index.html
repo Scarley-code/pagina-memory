@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/webp" href="imagenes/ArceusFavicon.webp" />
     <title>Memory</title>
 </head>
 <body>
@@ -20,11 +21,20 @@
             <p>Top5:</p>
         </div>
         <div class="menu_inicio">
-            <button id="iniciar">Iniciar juego</button>
+            <form action="juego.php" method="POST">
+                <fieldset>
+                    <legend>Formulario</legend>
+                    <label>Nombre</label>
+                    <p>
+                        <input type="text" name="Nombre" />
+                    </p>
+                    <button type=button id="iniciar">Iniciar juego</button>
+                </fieldset>
+            </form>
         </div>
     </section>
     <footer>
-        <p>Footer</p>
+        <p>Memory Pokemon - Todos los derechos reservados</p>
     </footer>
     <script src="script.js"></script>
 </body>
